@@ -2,8 +2,10 @@
   width: 100%;
 }
 .boxContain {
+
   position: relative;
-  width: 100%;
+  width: inherit;
+
   .boxHead {
     background: #c3c3c3;
     border: 1px solid #00ff00;
