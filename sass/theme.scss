@@ -1,11 +1,13 @@
 .wrapper {
   width: 100%;
+  .boxWrapper {
+    height: 100px;
+    width: 100%;
+  } 
 }
 .boxContain {
-
   position: relative;
   width: inherit;
-
   .boxHead {
     background: #c3c3c3;
     border: 1px solid #00ff00;

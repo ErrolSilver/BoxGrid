@@ -1,4 +1,5 @@
 .wrapper { width: 100%; }
+.wrapper .boxWrapper { height: 100px; width: 100%; }
 
 .boxContain { position: relative; width: inherit; }
 .boxContain .boxHead { background: #c3c3c3; border: 1px solid #00ff00; float: left; height: 100px; position: relative; text-align: center; width: 25%; z-index: 2; }
