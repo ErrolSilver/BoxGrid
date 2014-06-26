@@ -1,13 +1,14 @@
-function boxExpand() { 
+function boxExpand() {
   var $rowItem = $('.wrapper').innerWidth() / $('.boxHead').outerWidth(true);
   var $boxColumns = $('.boxHead').length / $rowItem;
   var $boxes = $('div.boxContain');
+  var i;
 
   //hide all boxcontents
   $('.boxContent').addClass('hidden');
 
   //wrap each "row" of divs in a wrapper to apply margin to on click
-    for (var i = 0; i < $boxes.length; i+=$rowItem) {
+    for (i = 0; i < $boxes.length; i+=$rowItem) {
       $boxes.slice(i, i+$rowItem).wrapAll('<div class="boxWrapper"></div>');
     };
 
