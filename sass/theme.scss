@@ -1,7 +1,13 @@
+$boxHeight: 100px;
+$break-mini: 320px;
+$break-small: 768px;
+$break-medium: 992px;
+$break-large: 1200px;
+
 .wrapper {
   width: 100%;
   .boxWrapper {
-    height: 100px;
+    height: $boxHeight;
     width: 100%;
   } 
 }
@@ -11,10 +17,9 @@
     background: #c3c3c3;
     border: 1px solid #00ff00;
     float: left;  
-    height: 100px;
+    height: $boxHeight;
     position: relative;
     text-align: center;
-    width: 25%;
     z-index: 2;
     .boxHeadContent {
       display: table;
@@ -33,5 +38,31 @@
     position: absolute;
     width: 100%;
     z-index: 1;
+  }
+}
+
+@media screen and (max-width: $break-mini) {
+  .boxHead {
+    width: 100%;
+  }
+}
+@media screen and (min-width: $break-mini + 1) and (max-width: $break-small) {
+  .boxHead {
+    width: 50%;
+  }
+}
+@media screen and (min-width: $break-small + 1) and (max-width: $break-medium) {
+  .boxHead {
+    width: 25%;
+  }
+}
+@media screen and (min-width: $break-medium + 1) and (max-width: $break-large) {
+  .boxHead {
+    width: 20%;
+  }
+}
+@media screen and (min-width: $break-large) {
+  .boxHead {
+    width: 20%;
   }
 }
