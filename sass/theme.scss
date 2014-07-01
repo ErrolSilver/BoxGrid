@@ -20,6 +20,7 @@ $break-large: 1200px;
     height: $boxHeight;
     position: relative;
     text-align: center;
+    width: 20%;
     z-index: 2;
     .boxHeadContent {
       display: table;
@@ -40,7 +41,7 @@ $break-large: 1200px;
     z-index: 1;
   }
 }
-
+/*
 @media screen and (max-width: $break-mini) {
   .boxHead {
     width: 100%;
@@ -65,4 +66,4 @@ $break-large: 1200px;
   .boxHead {
     width: 20%;
   }
-}
+}*/

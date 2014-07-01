@@ -1,15 +1,5 @@
 (function ($) {
-  function boxWrap() {
-    $(window).resize(function() {
-      setTimeout(function () {
-        $rowItem = Math.ceil($('.wrapper').innerWidth() / $('.boxHead').outerWidth(true));
-        console.log($rowItem);
-      }, 200);
-    });
-  }
-
-  function boxExpand() {
-    var $rowItem = Math.floor($('.wrapper').innerWidth() / $('.boxHead').outerWidth(true)),
+  var $rowItem,
       $boxes = $('div.boxContain'),
       $activeContain,
       $activeWrap,
@@ -18,13 +8,50 @@
       $containDistance,
       i;
 
+  function boxWrap() {
+    var onResize = (function () {
+      var timers = {};
+      return function (callback, ms, uniqueId) {
+        if (!uniqueId) {
+          uniqueId = "ID already in use";
+        }
+        if (timers[uniqueId]) {
+          clearTimeout (timers[uniqueId]);
+        }
+        timers[uniqueId] = setTimeout(callback, ms);
+      }
+    })();
+
+
+
+    $(window).resize(function() {
+      var $rowItem = Math.floor($('.wrapper').innerWidth() / $('.boxHead').outerWidth(true));
+      console.log($rowItem);
+      onResize(function() {
+       // $boxes.parent('div.boxWrapper').remove();
+        /*
+        for (i = 0; i < $boxes.length; i += $rowItem) {
+          $boxes.slice(i, i + $rowItem).wrapAll('<div class="boxWrapper"></div>')
+        }
+        */
+        
+      }, 100, 'box wrap');
+    });
+
+
+
+  }
+
+  function boxExpand() {
+    var $rowItem = Math.floor($('.wrapper').innerWidth() / $('.boxHead').outerWidth(true));
+
+    for (i = 0; i < $boxes.length; i += $rowItem) {
+      $boxes.slice(i, i + $rowItem).wrapAll('<div class="boxWrapper"></div>')
+    }
+
     //hide all boxcontents
     $('.boxContent').addClass('hidden');
 
-    //wrap each "row" of divs in a wrapper to apply margin to on click
-    for (i = 0; i < $boxes.length; i += $rowItem) {
-      $boxes.slice(i, i + $rowItem).wrapAll('<div class="boxWrapper"></div>');
-    }
 
     $('.boxHead').click(function () {
       $activeContain = $(this).parent('.boxContain');
