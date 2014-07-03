@@ -25,17 +25,19 @@
 
 
     $(window).resize(function() {
-      var $rowItem = Math.floor($('.wrapper').innerWidth() / $('.boxHead').outerWidth(true));
+      var $rowItem = Math.ceil($('.wrapper').innerWidth() / $('.boxHead').outerWidth(true));
       console.log($rowItem);
       onResize(function() {
-       // $boxes.parent('div.boxWrapper').remove();
-        /*
-        for (i = 0; i < $boxes.length; i += $rowItem) {
-          $boxes.slice(i, i + $rowItem).wrapAll('<div class="boxWrapper"></div>')
-        }
-        */
+
         
-      }, 100, 'box wrap');
+       $boxes.unwrap();
+        setTimeout(function () {
+          for (i = 0; i < $boxes.length; i += $rowItem) {
+            $boxes.slice(i, i + $rowItem).wrapAll('<div class="boxWrapper"></div>')
+          }
+        },1);
+        
+      }, 2, 'box wrap');
     });
 
 
@@ -49,8 +51,8 @@
       $boxes.slice(i, i + $rowItem).wrapAll('<div class="boxWrapper"></div>')
     }
 
-    //hide all boxcontents
-    $('.boxContent').addClass('hidden');
+    // hide all boxcontents
+    $('.boxContent').addClass('notShown');
 
 
     $('.boxHead').click(function () {
@@ -59,16 +61,16 @@
       $activeBox = $activeContain.children('.boxContent');
       $activeHead = $activeContain.children('.boxHead');
 
-    //shows clicked box content, hides others
-      $activeBox.toggleClass('hidden');
-      $('.boxContent').not($activeBox).addClass('hidden');
+    // shows clicked box content, hides others
+      $activeBox.toggleClass('notShown');
+      $('.boxContent').not($activeBox).addClass('notShown');
 
-    //adds space for content to appear, removes if inactive
+    // adds space for content to appear, removes if inactive
       $activeWrap.css("margin-bottom", $activeBox.outerHeight());
       $('.boxWrapper').not($activeWrap).css('margin-bottom', 0);
 
 
-      //places content depending on which "row" of headers it falls into
+      // places content depending on which "row" of headers it falls into
       $containDistance = $activeHead.position();
       $activeBox.css('top', $containDistance.top + $activeHead.outerHeight());
     });
