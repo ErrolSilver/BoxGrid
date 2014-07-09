@@ -22,14 +22,10 @@
       }
     })();
 
-
-
     $(window).resize(function() {
       var $rowItem = Math.ceil($('.wrapper').innerWidth() / $('.boxHead').outerWidth(true));
       console.log($rowItem);
       onResize(function() {
-
-        
        $boxes.unwrap();
         setTimeout(function () {
           for (i = 0; i < $boxes.length; i += $rowItem) {
@@ -38,6 +34,7 @@
         },1);
         
       }, 2, 'box wrap');
+      $('.boxContent').addClass('notShown');
     });
 
 

@@ -50,14 +50,9 @@ $break-large: 1200px;
   }
 }
 
-@media screen and (max-width: $break-mini) {
-  .boxHead {
-    width: 100%;
-  }
-}
 @media screen and (min-width: $break-mini + 1) and (max-width: $break-small) {
   .boxHead {
-    width: 50%;
+    width: 100%;
   }
 }
 @media screen and (min-width: $break-small + 1) and (max-width: $break-medium) {
