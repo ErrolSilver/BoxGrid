@@ -1,5 +1,4 @@
 $boxHeight: 100px;
-$break-mini: 320px;  
 $break-small: 768px;
 $break-medium: 992px;
 $break-large: 1200px;
@@ -14,11 +13,8 @@ $break-large: 1200px;
 .boxContain {
   position: relative;
   .notShown {
-    display: block;
-    line-height:0;
     padding: 0 !important;
-    height: 0;
-    overflow: hidden;
+    max-height: 0 !important;
   }
   .boxHead {
     background: #c3c3c3;
@@ -27,11 +23,12 @@ $break-large: 1200px;
     height: $boxHeight;
     position: relative;
     text-align: center;
+    z-index: 2;
     .boxHeadContent {
       display: table;
       height: 100%;
       width: 100%;
-
+      z-index: 1;
       h2 {
         display: table-cell;
         vertical-align: middle;
@@ -41,16 +38,15 @@ $break-large: 1200px;
   .boxContent {
     background: #f2f2f2;
     float: left;
+    max-height: 1000px;
+    overflow: hidden;
     padding: 2.5%;
     position: absolute;
-    -webkit-transition: height 0.8s;
-    -moz-transition: height 0.8s;
-    transition: height 0.8s;
     width: 100%;
   }
 }
 
-@media screen and (min-width: $break-mini + 1) and (max-width: $break-small) {
+@media screen and (max-width: $break-small) {
   .boxHead {
     width: 100%;
   }

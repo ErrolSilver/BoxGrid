@@ -63,13 +63,22 @@
       $('.boxContent').not($activeBox).addClass('notShown');
 
     // adds space for content to appear, removes if inactive
+
+      $activeWrap.velocity({
+        "margin-bottom":  $activeBox.outerHeight()
+      }, 200);
       $activeWrap.css("margin-bottom", $activeBox.outerHeight());
-      $('.boxWrapper').not($activeWrap).css('margin-bottom', 0);
+      
+      //$('.boxWrapper').not($activeWrap).css('margin-bottom', 0);
 
 
       // places content depending on which "row" of headers it falls into
       $containDistance = $activeHead.position();
-      $activeBox.css('top', $containDistance.top + $activeHead.outerHeight());
+
+      $activeBox.velocity({
+        top: $containDistance.top + $activeHead.outerHeight()
+      }, 200);
+      //$activeBox.css('top', $containDistance.top + $activeHead.outerHeight());
     });
   }
   boxWrap();
