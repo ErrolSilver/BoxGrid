@@ -88,17 +88,25 @@
       }   // NEEDS ATTENTION 
 
 
+      $('.boxContent').not($activeBox).velocity({
+        height: 0,
+        padding: 0
+      },{
+       duration: 200,
+       queue: 'boxAnim'
+      });
 
       $activeBox.velocity({
         height:  $savedHeights[$boxIndex],
         padding: '2.5%'
-      }, 200); 
+      },{
+        duration: 200,
+        queue: 'boxAnim'
+      });
 
-      $('.boxContent').not($activeBox).velocity({
-        height: 0,
-        padding: 0
-      }, 200);
-
+      $('.boxContent').not($activeBox).dequeue('boxAnim');
+      $activeBox.dequeue('boxAnim');
+    
     // Adds space for content to appear, removes if inactive
       $activeWrap.velocity({
         "margin-bottom":  $savedHeights[$boxIndex]
