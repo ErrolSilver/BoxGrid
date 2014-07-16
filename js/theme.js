@@ -1,4 +1,5 @@
 (function ($) {
+  'use strict';
   var $rowItem,
       $boxes = $('div.boxContain'),
       $activeContain,
@@ -6,13 +7,14 @@
       $activeBox,
       $activeHead,
       $containDistance,
+      $boxIndex,
       $savedHeights = [],
       i;
 
-      // Stores content height for use as margin later
-      $('.boxContent').each(function() {
-        $savedHeights.push($(this).outerHeight(true));
-      });
+  // Stores content height for use as margin later
+  $('.boxContent').each(function() {
+    $savedHeights.push($(this).outerHeight(true));
+  });
 
   function boxWrap() {
 
@@ -24,7 +26,7 @@
           uniqueId = "ID already in use";
         }
         if (timers[uniqueId]) {
-          clearTimeout (timers[uniqueId]);
+          clearTimeout(timers[uniqueId]);
         }
         timers[uniqueId] = setTimeout(callback, ms);
       }
@@ -52,7 +54,7 @@
       $('.boxContent').css({
         height: 0,
         padding: 0
-      })
+      });
     });
   }
 
@@ -79,47 +81,42 @@
       $activeHead = $activeContain.children('.boxHead');
       $boxIndex = $('.boxHead').index($(this));
 
-    // Shows clicked box content, hides others
-    console.log($(this).parent('.boxWrapper'));
-      if ($(this).parent('.boxWrapper').css('margin-bottom') != 0) {
-        console.log("its not zero");
-      } else {
-        console.log("its zero");
-      }   // NEEDS ATTENTION 
-
-
-      $('.boxContent').not($activeBox).velocity({
-        height: 0,
-        padding: 0
-      },{
-       duration: 200,
-       queue: 'boxAnim'
-      });
-
-      $activeBox.velocity({
-        height:  $savedHeights[$boxIndex],
-        padding: '2.5%'
-      },{
-        duration: 200,
-        queue: 'boxAnim'
-      });
-
-      $('.boxContent').not($activeBox).dequeue('boxAnim');
-      $activeBox.dequeue('boxAnim');
-    
-    // Adds space for content to appear, removes if inactive
-      $activeWrap.velocity({
-        "margin-bottom":  $savedHeights[$boxIndex]
-      }, 200);
-      
-      $('.boxWrapper').not($activeWrap).velocity({'margin-bottom': 0}, 200);
-
-
       // Places content depending on which "row" of headers it falls into
       $containDistance = $activeHead.position();
 
       // Adds space so the header doesn't overlap the content
       $activeBox.css('top', $containDistance.top + $activeHead.outerHeight());
+
+
+
+      /* Animations ----------------------------------------- */
+
+      // Shows clicked box content, hides others;
+        if ($activeWrap.css('margin-bottom') != 0) {
+          $activeWrap.velocity({
+            'margin-bottom': 0
+          }, 100);
+          $activeBox.velocity({
+            'height': 0
+          }, 100);
+        }
+
+        $('.boxContent').not($activeBox).velocity({
+          height: 0,
+          padding: 0
+        }, 100);
+
+        $activeBox.velocity({
+          height:  $savedHeights[$boxIndex],
+          padding: '2.5%'
+        },200);
+
+      // Adds space for content to appear, removes if inactive
+        $activeWrap.velocity({
+          "margin-bottom":  $savedHeights[$boxIndex]
+        }, 200);
+        
+        $('.boxWrapper').not($activeWrap).velocity({'margin-bottom': 0}, 200);
     });
 
   }
