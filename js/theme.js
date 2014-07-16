@@ -1,18 +1,18 @@
 (function ($) {
   'use strict';
   var $rowItem,
-      $boxes = $('div.boxContain'),
-      $activeContain,
-      $activeWrap,
-      $activeBox,
-      $activeHead,
-      $containDistance,
-      $boxIndex,
-      $savedHeights = [],
-      i;
+    $boxes = $('div.boxContain'),
+    $activeContain,
+    $activeWrap,
+    $activeBox,
+    $activeHead,
+    $containDistance,
+    $boxIndex,
+    $savedHeights = [],
+    i;
 
   // Stores content height for use as margin later
-  $('.boxContent').each(function() {
+  $('.boxContent').each(function () {
     $savedHeights.push($(this).outerHeight(true));
   });
 
@@ -29,7 +29,7 @@
           clearTimeout(timers[uniqueId]);
         }
         timers[uniqueId] = setTimeout(callback, ms);
-      }
+      };
     })();
 
 
@@ -37,7 +37,7 @@
       // sets rowItem to according to window size
       var $rowItem = Math.ceil($('.wrapper').innerWidth() / $('.boxHead').outerWidth(true));
 
-      onResize(function() {
+      onResize(function () {
 
       // Removes existing wrapper
        $boxes.unwrap();
@@ -81,7 +81,7 @@
       $activeHead = $activeContain.children('.boxHead');
       $boxIndex = $('.boxHead').index($(this));
 
-      // Places content depending on which "row" of headers it falls into
+      // Places content depending on which row of headers it falls under
       $containDistance = $activeHead.position();
 
       // Adds space so the header doesn't overlap the content
@@ -109,14 +109,16 @@
         $activeBox.velocity({
           height:  $savedHeights[$boxIndex],
           padding: '2.5%'
-        },200);
+        }, 200);
 
       // Adds space for content to appear, removes if inactive
         $activeWrap.velocity({
           "margin-bottom":  $savedHeights[$boxIndex]
         }, 200);
         
-        $('.boxWrapper').not($activeWrap).velocity({'margin-bottom': 0}, 200);
+        $('.boxWrapper').not($activeWrap).velocity({
+          'margin-bottom': 0
+        }, 200);
     });
 
   }
