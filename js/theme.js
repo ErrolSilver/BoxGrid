@@ -81,6 +81,12 @@
       $activeHead = $activeContain.children('.boxHead');
       $boxIndex = $('.boxHead').index($(this));
 
+      if ($(this).hasClass('activeHead')) {
+   
+      }
+
+      $(this).addClass('activeHead');
+
       // Places content depending on which row of headers it falls under
       $containDistance = $activeHead.position();
 
@@ -92,33 +98,25 @@
       /* Animations ----------------------------------------- */
 
       // Shows clicked box content, hides others;
-        if ($activeWrap.css('margin-bottom') != 0) {
-          $activeWrap.velocity({
-            'margin-bottom': 0
-          }, 100);
-          $activeBox.velocity({
-            'height': 0
-          }, 100);
-        }
 
-        $('.boxContent').not($activeBox).velocity({
-          height: 0,
-          padding: 0
-        }, 100);
+      $('.boxContent').not($activeBox).velocity({
+        height: 0,
+        padding: 0
+      }, 100);
 
-        $activeBox.velocity({
-          height:  $savedHeights[$boxIndex],
-          padding: '2.5%'
-        }, 200);
+      $activeBox.velocity({
+        height:  $savedHeights[$boxIndex],
+        padding: '2.5%'
+      }, 200);
 
-      // Adds space for content to appear, removes if inactive
-        $activeWrap.velocity({
-          "margin-bottom":  $savedHeights[$boxIndex]
-        }, 200);
-        
-        $('.boxWrapper').not($activeWrap).velocity({
-          'margin-bottom': 0
-        }, 200);
+    // Adds space for content to appear, removes if inactive
+      $activeWrap.velocity({
+        "margin-bottom":  $savedHeights[$boxIndex]
+      }, 200);
+      
+      $('.boxWrapper').not($activeWrap).velocity({
+        'margin-bottom': 0
+      }, 200);
     });
 
   }
